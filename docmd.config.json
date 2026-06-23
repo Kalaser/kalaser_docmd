@@ -1,0 +1,39 @@
+{
+  "title": "My Documentation",
+  "url": "https://YOUR_USERNAME.github.io/YOUR_REPO",
+  "src": "docs",
+  "out": "site",
+  "theme": {
+    "name": "default"
+  },
+  "plugins": {
+    "seo": {
+      "defaultDescription": "Documentation built with docmd."
+    },
+    "llms": {}
+  },
+  "navigation": [
+    {
+      "title": "Home",
+      "path": "/",
+      "icon": "home"
+    },
+    {
+      "title": "Resources",
+      "icon": "feather",
+      "collapsible": false,
+      "children": [
+        {
+          "title": "Documentation",
+          "path": "external:https://docs.docmd.io",
+          "external": true
+        },
+        {
+          "title": "Configuration Guide",
+          "path": "external:https://docs.docmd.io/configuration/overview",
+          "external": true
+        }
+      ]
+    }
+  ]
+}

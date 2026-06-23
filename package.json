@@ -1,0 +1,12 @@
+{
+  "name": "my-docs",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "npx @docmd/core dev",
+    "build": "npx @docmd/core build"
+  },
+  "devDependencies": {
+    "@docmd/core": "latest"
+  }
+}
