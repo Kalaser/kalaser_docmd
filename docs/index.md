@@ -1,45 +1,44 @@
 ---
-title: Welcome
+title: 欢迎
 ---
 
-# Welcome to Your Docs 🎉
+# 欢迎使用 docmd 🎉
 
-This is your documentation site built with [docmd](external:https://docmd.io), the zero-config AI-first documentation engine.
+这是由 [docmd](external:https://docmd.io) 驱动的文档站点，一个零配置的 AI 优先文档引擎。
 
-::: callout info "AI-First Documentation"
-docmd is designed for AI agents. Your docs are automatically optimized for LLMs with generated `llms.txt` context files and MCP server integration.
+::: callout info "AI-First 文档"
+docmd 专为 AI 代理设计。你的文档会自动生成 `llms.txt` 上下文文件，并支持 MCP 服务器集成。
 :::
 
-## Quick Start
+## 快速开始
 
-Edit this file at `docs/index.md`
+在 `docs/index.md` 中编辑内容即可。
 
-## Features
+## 特性
 
-- **Fast**: Lightning quick builds
-- **Simple**: Markdown only
-- **Beautiful**: Modern responsive design
-- **AI-Ready**: Built-in MCP server and llms.txt generation
-- **Free**: Host on GitHub Pages
+- **快速**：闪电般的构建速度
+- **简单**：仅需 Markdown
+- **美观**：现代化的响应式设计
+- **AI 就绪**：内置 MCP 服务器和 llms.txt 生成
+- **免费**：托管在 GitHub Pages 上
 
-## Next Steps
+## 下一步
 
-1. Edit `docmd.config.json` with your project details
-2. Add more `.md` files in the `docs/` folder
-3. Customize the theme
-4. Add plugins for extra features
+1. 编辑 `docs/` 文件夹中的 `.md` 文件来添加更多页面
+2. 在 `docmd.config.json` 中自定义导航栏
+3. 探索主题和插件
 
-## Connect with AI Agents
+## 与 AI 代理协作
 
-Help AI agents work with your documentation using MCP or docmd-skills:
+使用 MCP 或 docmd-skills 帮助 AI 代理更好地利用你的文档：
 
-::: button "MCP Server Setup" external:https://docs.docmd.io/api/mcp-server icon:bot
-::: button "Agent Skills Guide" external:https://docs.docmd.io/guides/ai-optimisation/mcp-and-agent-skills icon:brain
+::: button "MCP 服务器配置" external:https://docs.docmd.io/api/mcp-server icon:bot
+::: button "Agent 技能指南" external:https://docs.docmd.io/guides/ai-optimisation/mcp-and-agent-skills icon:brain
 
-## Learn More
+## 了解更多
 
-- **[Official Documentation](external:https://docs.docmd.io)**
-- **[GitHub Repo](external:https://github.com/docmd-io/docmd)**
-- **[CLI References](external:https://docs.docmd.io/api/cli)**
-- **[Custom Containers](external:https://docs.docmd.io/content/containers/)**
-- **[Plugins](external:https://docs.docmd.io/plugins/overview)**
+- **[官方文档](external:https://docs.docmd.io)**
+- **[GitHub 仓库](external:https://github.com/docmd-io/docmd)**
+- **[CLI 参考](external:https://docs.docmd.io/api/cli)**
+- **[自定义容器](external:https://docs.docmd.io/content/containers/)**
+- **[插件系统](external:https://docs.docmd.io/plugins/overview)**

@@ -1,39 +1,27 @@
 {
-  "title": "My Documentation",
+  "title": "我的文档",
   "url": "https://YOUR_USERNAME.github.io/YOUR_REPO",
   "src": "docs",
   "out": "site",
   "theme": {
     "name": "default"
   },
+  "i18n": {
+    "default": "zh",
+    "locales": [
+      { "id": "zh", "label": "中文" }
+    ]
+  },
   "plugins": {
     "seo": {
-      "defaultDescription": "Documentation built with docmd."
-    },
-    "llms": {}
+      "defaultDescription": "基于 docmd 构建的中文技术文档站。"
+    }
   },
   "navigation": [
     {
-      "title": "Home",
+      "title": "首页",
       "path": "/",
       "icon": "home"
-    },
-    {
-      "title": "Resources",
-      "icon": "feather",
-      "collapsible": false,
-      "children": [
-        {
-          "title": "Documentation",
-          "path": "external:https://docs.docmd.io",
-          "external": true
-        },
-        {
-          "title": "Configuration Guide",
-          "path": "external:https://docs.docmd.io/configuration/overview",
-          "external": true
-        }
-      ]
     }
   ]
 }
