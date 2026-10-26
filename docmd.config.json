@@ -22,6 +22,36 @@
       "title": "首页",
       "path": "/",
       "icon": "home"
+    },
+    {
+      "title": "指南",
+      "icon": "book",
+      "collapsible": true,
+      "children": [
+        { "title": "快速开始", "path": "/guides/getting-started" },
+        { "title": "写作规范", "path": "/guides/writing-docs" }
+      ]
+    },
+    {
+      "title": "教程",
+      "icon": "code",
+      "children": [
+        { "title": "第一个文档", "path": "/tutorial/first-post" }
+      ]
+    },
+    {
+      "title": "参考",
+      "icon": "settings",
+      "children": [
+        { "title": "配置参考", "path": "/reference/configuration" }
+      ]
+    },
+    {
+      "title": "笔记",
+      "icon": "brain",
+      "children": [
+        { "title": "AI 学习笔记", "path": "/articles/ai-notes" }
+      ]
     }
   ]
 }

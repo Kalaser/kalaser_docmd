@@ -2,43 +2,72 @@
 title: 欢迎
 ---
 
-# 欢迎使用 docmd 🎉
+# 我的文档站 📚
 
-这是由 [docmd](external:https://docmd.io) 驱动的文档站点，一个零配置的 AI 优先文档引擎。
+基于 [docmd](external:https://docmd.io) 构建的中文技术文档站，专为 AI 代理优化。
 
 ::: callout info "AI-First 文档"
 docmd 专为 AI 代理设计。你的文档会自动生成 `llms.txt` 上下文文件，并支持 MCP 服务器集成。
 :::
 
-## 快速开始
+---
 
-在 `docs/index.md` 中编辑内容即可。
+## 📖 文档导航
 
-## 特性
+### 快速开始
 
-- **快速**：闪电般的构建速度
-- **简单**：仅需 Markdown
-- **美观**：现代化的响应式设计
-- **AI 就绪**：内置 MCP 服务器和 llms.txt 生成
-- **免费**：托管在 GitHub Pages 上
+从零搭建你的第一个文档站点。
 
-## 下一步
+[→ 快速开始](/guides/getting-started)
 
-1. 编辑 `docs/` 文件夹中的 `.md` 文件来添加更多页面
-2. 在 `docmd.config.json` 中自定义导航栏
-3. 探索主题和插件
+### 写作规范
 
-## 与 AI 代理协作
+了解 Markdown 语法、frontmatter 字段与内容组织规范。
 
-使用 MCP 或 docmd-skills 帮助 AI 代理更好地利用你的文档：
+[→ 写作规范](/guides/writing-docs)
 
-::: button "MCP 服务器配置" external:https://docs.docmd.io/api/mcp-server icon:bot
-::: button "Agent 技能指南" external:https://docs.docmd.io/guides/ai-optimisation/mcp-and-agent-skills icon:brain
+### 配置参考
 
-## 了解更多
+完整的 `docmd.config.json` 配置项说明。
 
-- **[官方文档](external:https://docs.docmd.io)**
-- **[GitHub 仓库](external:https://github.com/docmd-io/docmd)**
-- **[CLI 参考](external:https://docs.docmd.io/api/cli)**
-- **[自定义容器](external:https://docs.docmd.io/content/containers/)**
-- **[插件系统](external:https://docs.docmd.io/plugins/overview)**
+[→ 配置参考](/reference/configuration)
+
+---
+
+## ✨ 教程
+
+手把手教你创建第一篇文档并完成发布。
+
+[→ 第一个文档](/tutorial/first-post)
+
+---
+
+## 🧠 技术笔记
+
+学习记录与思考，当前包含 AI 与大语言模型相关内容。
+
+[→ AI 学习笔记](/articles/ai-notes)
+
+---
+
+## 🔧 本地开发
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+```
+
+---
+
+## 🌐 关于本站
+
+- **框架**：[docmd](external:https://docmd.io) — 零配置 AI 优先文档引擎
+- **托管**：[GitHub Pages](external:https://pages.github.com/)
+- **源码**：[GitHub Repository](external:https://github.com/Kalaser/kalaser_docmd)
+- **许可**：[MIT License](external:https://github.com/Kalaser/kalaser_docmd/blob/main/LICENSE)
