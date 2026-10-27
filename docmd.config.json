@@ -55,7 +55,7 @@
       "collapsible": true,
       "children": [
         { "title": "嵌入式平台框架开发通用指南", "path": "/embedded/embedded-framework-guide" },
-        { "title": "vivo TWS 应用框架技术文档", "path": "/embedded/tws-app-framework" },
+        { "title": "TWS框架技术文档", "path": "/embedded/tws-app-framework" },
         { "title": "NuttX API 全量接口使用指南", "path": "/embedded/nuttx-api-guide" },
         { "title": "消费者与生产者关系机制", "path": "/embedded/producer-consumer-mechanism" }
       ]

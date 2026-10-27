@@ -49,7 +49,7 @@ C 语言编码规范与高质量 C/C++ 编程实践。
 嵌入式系统框架、TWS 应用框架、NuttX API 与消息机制。
 
 - [嵌入式平台系统框架开发通用指南](/embedded/embedded-framework-guide)
-- [vivo TWS 耳机应用框架技术文档](/embedded/tws-app-framework)
+- [TWS框架技术文档](/embedded/tws-app-framework)
 - [NuttX API 全量接口使用指南](/embedded/nuttx-api-guide)
 - [消费者与生产者关系机制](/embedded/producer-consumer-mechanism)
 

@@ -1,44 +1,44 @@
 ---
-title: vivo TWS 耳机应用框架技术文档
+title: TWS框架技术文档
 date: 2026-10-27
-description: vivo TWS 耳机应用框架解析：QCC 线程机制、消息订阅发布、模块开发流程与开发规范。
+description: TWS 耳机应用框架解析：QCC 线程机制、消息订阅发布、模块开发流程与开发规范。
 tags: [TWS, 嵌入式, 应用框架, 蓝牙]
 ---
 
-# vivo TWS 耳机应用框架技术文档
+# TWS框架技术文档
 
-> 本文档基于 vivo TWS 内部培训材料整理，涵盖应用框架架构、QCC 线程机制、仓库管理、开发流程及开发规范等核心内容。
+> 本文档基于 TWS 耳机应用框架培训材料整理，涵盖应用框架架构、QCC 线程机制、仓库管理、开发流程及开发规范等核心内容。
 
 ------
 
 ## 目录
 
 1. TWS 应用框架与机制
-   - 1.1 [耳机 TWS 应用架构分层](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-11-耳机-tws-应用架构分层)
-   - 1.2 [QCC 线程机制：thread 划分](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-12-qcc-线程机制thread-划分)
-   - 1.3 [QCC 线程机制：task 与 tasklist 区别](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-13-qcc-线程机制task-与-tasklist-区别)
-   - 1.4 [仓库划分与平台切换控制](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-14-仓库划分与平台切换控制)
-   - 1.5 [新应用框架重点改变](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-15-新应用框架重点改变)
-   - 1.6 [消息订阅-发布过程](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-16-消息订阅-发布过程)
-   - 1.7 [TWS 消息机制扩展：同步发送](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-17-tws-消息机制扩展同步发送)
-   - 1.8 [模块开发两个基本原则与 ADK 管控](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-18-模块开发两个基本原则与-adk-管控)
-   - 1.9 [TWS 各层级调用框图总览](#vivo-tws-耳机应用框架技术文档-一tws-应用框架与机制-19-tws-各层级调用框图总览)
+   - 1.1 [耳机 TWS 应用架构分层](#tws框架技术文档-一tws-应用框架与机制-11-耳机-tws-应用架构分层)
+   - 1.2 [QCC 线程机制：thread 划分](#tws框架技术文档-一tws-应用框架与机制-12-qcc-线程机制thread-划分)
+   - 1.3 [QCC 线程机制：task 与 tasklist 区别](#tws框架技术文档-一tws-应用框架与机制-13-qcc-线程机制task-与-tasklist-区别)
+   - 1.4 [仓库划分与平台切换控制](#tws框架技术文档-一tws-应用框架与机制-14-仓库划分与平台切换控制)
+   - 1.5 [新应用框架重点改变](#tws框架技术文档-一tws-应用框架与机制-15-新应用框架重点改变)
+   - 1.6 [消息订阅-发布过程](#tws框架技术文档-一tws-应用框架与机制-16-消息订阅-发布过程)
+   - 1.7 [TWS 消息机制扩展：同步发送](#tws框架技术文档-一tws-应用框架与机制-17-tws-消息机制扩展同步发送)
+   - 1.8 [模块开发两个基本原则与 ADK 管控](#tws框架技术文档-一tws-应用框架与机制-18-模块开发两个基本原则与-adk-管控)
+   - 1.9 [TWS 各层级调用框图总览](#tws框架技术文档-一tws-应用框架与机制-19-tws-各层级调用框图总览)
 2. 开发流程
-   - 2.1 [自顶向下设计 + 自底向上实现](#vivo-tws-耳机应用框架技术文档-二开发流程-21-自顶向下设计-自底向上实现)
-   - 2.2 [以机盒模块为例的开发过程](#vivo-tws-耳机应用框架技术文档-二开发流程-22-以机盒模块为例的开发过程)
-   - 2.3 [实现 sdk_hal_uartcase.c 文件](#vivo-tws-耳机应用框架技术文档-二开发流程-23-实现-sdkhaluartcasec-文件)
-   - 2.4 [实现 sdk_hal_5V_detect.c 文件](#vivo-tws-耳机应用框架技术文档-二开发流程-24-实现-sdkhal5vdetectc-文件)
-   - 2.5 [实现 vivo_casebox_service.c 文件](#vivo-tws-耳机应用框架技术文档-二开发流程-25-实现-vivocaseboxservicec-文件)
-   - 2.6 [实现 vivo_casebox_manager.c 文件](#vivo-tws-耳机应用框架技术文档-二开发流程-26-实现-vivocaseboxmanagerc-文件)
-   - 2.7 [实现 ui_casebox.c 文件](#vivo-tws-耳机应用框架技术文档-二开发流程-27-实现-uicaseboxc-文件)
+   - 2.1 [自顶向下设计 + 自底向上实现](#tws框架技术文档-二开发流程-21-自顶向下设计-自底向上实现)
+   - 2.2 [以机盒模块为例的开发过程](#tws框架技术文档-二开发流程-22-以机盒模块为例的开发过程)
+   - 2.3 [实现 sdk_hal_uartcase.c 文件](#tws框架技术文档-二开发流程-23-实现-sdkhaluartcasec-文件)
+   - 2.4 [实现 sdk_hal_5V_detect.c 文件](#tws框架技术文档-二开发流程-24-实现-sdkhal5vdetectc-文件)
+   - 2.5 [实现 casebox_service.c 文件](#tws框架技术文档-二开发流程-25-实现-caseboxservicec-文件)
+   - 2.6 [实现 casebox_manager.c 文件](#tws框架技术文档-二开发流程-26-实现-caseboxmanagerc-文件)
+   - 2.7 [实现 ui_casebox.c 文件](#tws框架技术文档-二开发流程-27-实现-uicaseboxc-文件)
 3. 开发规范
-   - 3.1 [命名规范](#vivo-tws-耳机应用框架技术文档-三开发规范-31-命名规范)
-   - 3.2 [消息 ID 规范](#vivo-tws-耳机应用框架技术文档-三开发规范-32-消息-id-规范)
-   - 3.3 [修改权限规范](#vivo-tws-耳机应用框架技术文档-三开发规范-33-修改权限规范)
-   - 3.4 [SDK 修改宏管控](#vivo-tws-耳机应用框架技术文档-三开发规范-34-sdk-修改宏管控)
-   - 3.5 [消息发送 API 说明](#vivo-tws-耳机应用框架技术文档-三开发规范-35-消息发送-api-说明)
-   - 3.6 [task 和 tasklist 声明规范](#vivo-tws-耳机应用框架技术文档-三开发规范-36-task-和-tasklist-声明规范)
-   - 3.7 [其他开发规范](#vivo-tws-耳机应用框架技术文档-三开发规范-37-其他开发规范)
+   - 3.1 [命名规范](#tws框架技术文档-三开发规范-31-命名规范)
+   - 3.2 [消息 ID 规范](#tws框架技术文档-三开发规范-32-消息-id-规范)
+   - 3.3 [修改权限规范](#tws框架技术文档-三开发规范-33-修改权限规范)
+   - 3.4 [SDK 修改宏管控](#tws框架技术文档-三开发规范-34-sdk-修改宏管控)
+   - 3.5 [消息发送 API 说明](#tws框架技术文档-三开发规范-35-消息发送-api-说明)
+   - 3.6 [task 和 tasklist 声明规范](#tws框架技术文档-三开发规范-36-task-和-tasklist-声明规范)
+   - 3.7 [其他开发规范](#tws框架技术文档-三开发规范-37-其他开发规范)
 
 ------
 
@@ -46,33 +46,30 @@ tags: [TWS, 嵌入式, 应用框架, 蓝牙]
 
 ### 1.1 耳机 TWS 应用架构分层
 
-vivo TWS 耳机应用框架采用分层架构设计，从上到下依次分为：**App 层（UI）**、**Framework 框架层**、**Platform Abstraction Layer（平台抽象层）** 和 **SDK 层**。
+TWS 耳机应用框架采用分层架构设计，从上到下依次分为：**App 层（UI）**、**Framework 框架层**、**Platform Abstraction Layer（平台抽象层）** 和 **SDK 层**。
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│  App (UI)                                                            │
-│  System app | Battery app | Connect app | Input app | Interact app   │
-│  OTA app | ...app                                    | Exchange       │
-└─────────────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────────┐
-│  Framework                                                            │
-│  ┌──────────────┐  ┌──────────────────────────────────────────────┐ │
-│  │ base         │  │ vivo Framework APIs (Manager)                │ │
-│  │ Message      │  │  Battery | Connect | Input | Audio | DFX     │ │
-│  │ Define       │  │  OTA | Factory | ...                         │ │
-│  │ OS(system)   │  │ (Service层)                                   │ │
-│  │ Common       │  └──────────────────────────────────────────────┘ │
-│  └──────────────┘                                   Component/Sensor │
-└─────────────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────────┐
-│  Platform Abstraction Layer                                           │
-│  SDK OSAL | SDK HAL | SDK BT API | SDK Audio API | ...API            │
-│  vivo SDK Adapt                                                       │
-└─────────────────────────────────────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────────┐
-│  SDK                                                                  │
-│  QCC Platform | BES Platform | Airoha Platform | Wuqi Platform | ... │
-└─────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│  App (UI)                                                          │
+│  System app | Battery app | Connect app | Input app                │
+│  Interact app | OTA app | ...                                      │
+└────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│  Framework                                                         │
+│  base: Message / Define / OS(system) / Common                      │
+│  Manager / Service: Battery | Connect | Input | Audio | DFX        │
+│  OTA | Factory | ...                                               │
+│  Component / Sensor                                                │
+└────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│  Platform Abstraction Layer                                        │
+│  SDK OSAL | SDK HAL | SDK BT API | SDK Audio API | ...API          │
+│  SDK Adapt                                                         │
+└────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│  SDK                                                               │
+│  QCC Platform | BES Platform | Airoha Platform | Wuqi Platform | ...│
+└────────────────────────────────────────────────────────────────────┘
 ```
 
 **各层职责说明：**
@@ -88,13 +85,13 @@ vivo TWS 耳机应用框架采用分层架构设计，从上到下依次分为�
 **框架层目录树（与分层一致）：**
 
 ```
-vivo_TWS_OS/
+TWS_OS/
 └── framework/
     ├── base/
     ├── components/
     ├── SDK_AL/
-    ├── vivo_manager/
-    ├── vivo_services/
+    ├── manager/
+    ├── services/
     └── ui/
 ```
 
@@ -220,19 +217,19 @@ task_list:
 **仓库结构：仍然分为两个仓库——SDK 仓和 Earbud_Application 仓**
 
 ```
-SDK 仓                          Earbud_Application 仓
+SDK 仓                         Earbud_Application 仓
 ┌──────────────┐               ┌─────────────────────────────┐
 │ QCC SDK      │──────────────►│ QCC SDK 抽象层              │
 │              │               │                             │
 │ BES SDK      │──────────────►│ BES SDK 抽象层              │
-│              │               │  SDK 抽象层公共头文件        │
+│              │               │ SDK 抽象层公共头文件        │
 │ Airoha SDK   │──────────────►│ Airoha SDK 抽象层           │
-│              │               │  vivo Framework             │
+│              │               │ Framework                   │
 │ Wuqi SDK     │──────────────►│ Wuqi SDK 抽象层             │
-│              │               │  manager/service            │
+│              │               │ manager / service           │
 │ ...SDK       │──────────────►│ other SDK 抽象层            │
 └──────────────┘               │                             │
-                               │ vivo框架头文件  vivo APP    │
+                               │ 框架头文件 / APP            │
                                └─────────────────────────────┘
 ```
 
@@ -400,11 +397,11 @@ void sdk_TaskList_MessageExecuteImmediate(task_list_t *list, MessageId id, void 
 
 ┌──────────────┐    ┌──────────────────┐    ┌──────────────┐
 │  UI          │    │  UI exchange     │    │  UI          │
-│  Service/    │    │  vivo base       │    │  Service/    │
+│  Service/    │    │  base            │    │  Service/    │
 │  Manager     │    │  SDK AL Common   │    │  Manager     │
 │  SDK AL      │    │                  │    │  SDK AL      │
 └──────────────┘    └──────────────────┘    └──────────────┘
-    模块SE                                       模块SE
+     模块SE                                      模块SE
                     ┌──────────────────┐
 连接+音频           │                  │
 模块修改ADK ───────►│    ADK           │
@@ -481,7 +478,7 @@ void sdk_TaskList_MessageExecuteImmediate(task_list_t *list, MessageId id, void 
 #### 实现阶段（自底向上）
 
 1. **先实现 SDK 接口**（`sdk_hal_uartcase.c` / `sdk_hal_5v_detect.c`）
-2. **再实现 Service 功能\接口**（`vivo_casebox_service.c`）
+2. **再实现 Service 功能\接口**（`casebox_service.c`）
 3. **最后 UI 处理交互的部分**（`ui_casebox.c`）
 
 ------
@@ -586,7 +583,7 @@ bool sdk_hal_5v_detect_is_plugin(void);
 #include "sdk_hal_log.h"
 #include "sdk_hal_uartcase.h"
 #include "sdk_hal_uartcase_driver.h"  // 头文件包含
-#include "vivo_message_define.h"
+#include "message_define.h"
 
 #undef LOG_TAG
 #define LOG_TAG "sdk_uartcase"
@@ -637,7 +634,7 @@ switch(id) {
 ### 2.4 实现 sdk_hal_5V_detect.c 文件
 
 ```c
-#include "vivo_message_define.h"
+#include "message_define.h"
 #include "sdk_hal_log.h"
 #include "sdk_osal.h"
 #include "charger_monitor.h"        // 头文件包含
@@ -662,14 +659,14 @@ static void sdk_5v_detect_msg_handler(Task task, MessageId id, Message msg)
     UNUSED(msg);
     switch(id) {
         case CHARGER_MESSAGE_ATTACHED:
-            LOGI("VIVO_MSG_5V_PLUGIN");
+            LOGI("MSG_5V_PLUGIN");
             isPlugin = TRUE;
-            sdk_TaskList_MessageSendId(notifyTaskList, VIVO_MSG_5V_PLUGIN); // ← 转成内部消息广播
+            sdk_TaskList_MessageSendId(notifyTaskList, MSG_5V_PLUGIN); // ← 转成内部消息广播
             break;
         case CHARGER_MESSAGE_DETACHED:
-            LOGI("VIVO_MSG_5V_PLUGOUT");
+            LOGI("MSG_5V_PLUGOUT");
             isPlugin = FALSE;
-            sdk_TaskList_MessageSendId(notifyTaskList, VIVO_MSG_5V_PLUGOUT);
+            sdk_TaskList_MessageSendId(notifyTaskList, MSG_5V_PLUGOUT);
             break;
         default:
             break;
@@ -677,7 +674,7 @@ static void sdk_5v_detect_msg_handler(Task task, MessageId id, Message msg)
 }
 // 这里收到SDK的消息，然后转换成我们内部的消息，发送出去
 // 因为考虑到接收者有限，所以创建了本地的 taskList
-// 这里实际也可以改成：vivo_msg_broadcast(VIVO_MSG_5V_PLUGIN)
+// 这里实际也可以改成：msg_broadcast(MSG_5V_PLUGIN)
 
 bool sdk_hal_5v_detect_is_plugin(void) ...
 void sdk_hal_5v_detect_add_task(Task add_task) ...
@@ -693,20 +690,20 @@ void sdk_hal_5v_detect_init(void)
 
 ------
 
-### 2.5 实现 vivo_casebox_service.c 文件
+### 2.5 实现 casebox_service.c 文件
 
 同样将三层结构搭建好，拿到 Msg 并作对应的处理：
 
 ```c
 #include "sdk_common.h"
-#include "vivo_framework_common.h"
-#include "vivo_casebox_protocol.h"
+#include "framework_common.h"
+#include "casebox_protocol.h"
 
 #undef LOG_TAG
-#define LOG_TAG "vivo_casebox_service"
+#define LOG_TAG "casebox_service"
 
-static TaskData vivo_casebox_service_task;   // 获取task
-static task_list_t* vivo_casebox_service_parser_notify_tasklist = NULL;
+static TaskData casebox_service_task;   // 获取task
+static task_list_t* casebox_service_parser_notify_tasklist = NULL;
 
 /*
  * @brief task接到系统os tasklist中
@@ -714,7 +711,7 @@ static task_list_t* vivo_casebox_service_parser_notify_tasklist = NULL;
  * @param[in] id: 发送的Message ID
  * @param[in] message: 消息数据，任意类型（收到消息后需要强制类型转换）
  */
-static void vivo_casebox_service_msg_handler(Task task, MessageId id, Message msg)
+static void casebox_service_msg_handler(Task task, MessageId id, Message msg)
 {
     UNUSED(task);
     UNUSED(msg);
@@ -728,26 +725,26 @@ static void vivo_casebox_service_msg_handler(Task task, MessageId id, Message ms
 **对外接口：**
 
 ```c
-#void vivo_casebox_service_keep_uart_open(bool is_keep_open) ...
-#void vivo_casebox_service_switch_baudrate(uint8 sw_baud) ...
-#void vivo_casebox_service_get_parser_result_add_task(Task add_task) ...
-vivo_box_status_t vivo_casebox_service_get_curr_box_state(void) ...
-#void vivo_casebox_service_tx_rsp_state(uint8_t type, uint8 cmd, uint8 state) ...
-#bool vivo_casebox_service_tx_rsp_data(uint8_t type, uint8 cmd,
+#void casebox_service_keep_uart_open(bool is_keep_open) ...
+#void casebox_service_switch_baudrate(uint8 sw_baud) ...
+#void casebox_service_get_parser_result_add_task(Task add_task) ...
+box_status_t casebox_service_get_curr_box_state(void) ...
+#void casebox_service_tx_rsp_state(uint8_t type, uint8 cmd, uint8 state) ...
+#bool casebox_service_tx_rsp_data(uint8_t type, uint8 cmd,
                                         const uint8 *payload, uint16 size_payload) ...
 ```
 
 **初始化：**
 
 ```c
-void vivo_casebox_service_init(void)
+void casebox_service_init(void)
 {
-    if(vivo_casebox_service_parser_notify_tasklist == NULL) {
-        vivo_casebox_service_parser_notify_tasklist = sdk_TaskList_Create();
+    if(casebox_service_parser_notify_tasklist == NULL) {
+        casebox_service_parser_notify_tasklist = sdk_TaskList_Create();
     }
-    vivo_casebox_service_task.handler = vivo_casebox_service_msg_handler;
-    vivo_os_system_add_task(&vivo_casebox_service_task);  // ← 向SDK AL注册task
-    sdk_hal_uart_case_add_task(&vivo_casebox_service_task);
+    casebox_service_task.handler = casebox_service_msg_handler;
+    os_system_add_task(&casebox_service_task);  // ← 向SDK AL注册task
+    sdk_hal_uart_case_add_task(&casebox_service_task);
 }
 ```
 
@@ -760,70 +757,70 @@ void vivo_casebox_service_init(void)
 
 ------
 
-### 2.6 实现 vivo_casebox_manager.c 文件
+### 2.6 实现 casebox_manager.c 文件
 
-> **注意：manager 是不带 3 层结构的**，应该只是把 service 的接口封装成 manager。然后添加到 `vivo_framework_common.h`
+> **注意：manager 是不带 3 层结构的**，应该只是把 service 的接口封装成 manager。然后添加到 `framework_common.h`
 
 ```c
-#include "vivo_casebox_service.h"
-#include "vivo_casebox_manager.h"
+#include "casebox_service.h"
+#include "casebox_manager.h"
 
-void vivo_casebox_manager_keep_uart_open(bool is_keep_open)
+void casebox_manager_keep_uart_open(bool is_keep_open)
 {
-    vivo_casebox_service_keep_uart_open(is_keep_open);
+    casebox_service_keep_uart_open(is_keep_open);
 }
 
-void vivo_casebox_manager_switch_baudrate(uint8 sw_baud)
+void casebox_manager_switch_baudrate(uint8 sw_baud)
 {
-    vivo_casebox_service_switch_baudrate(sw_baud);
+    casebox_service_switch_baudrate(sw_baud);
 }
 
-void vivo_casebox_manager_get_parser_result_add_task(Task add_task)
+void casebox_manager_get_parser_result_add_task(Task add_task)
 {
-    vivo_casebox_service_get_parser_result_add_task(add_task);
+    casebox_service_get_parser_result_add_task(add_task);
 }
 
-vivo_box_status_t vivo_casebox_manager_get_curr_box_state(void)
+box_status_t casebox_manager_get_curr_box_state(void)
 {
-    return vivo_casebox_service_get_curr_box_state();
+    return casebox_service_get_curr_box_state();
 }
 
-bool vivo_casebox_manager_tx_rsp_state(uint8_t type, uint8 cmd, uint8 state)
+bool casebox_manager_tx_rsp_state(uint8_t type, uint8 cmd, uint8 state)
 {
-    return vivo_casebox_service_tx_rsp_state(type, cmd, state);
+    return casebox_service_tx_rsp_state(type, cmd, state);
 }
 
-bool vivo_casebox_manager_tx_rsp_data(uint8_t type, uint8 cmd,
+bool casebox_manager_tx_rsp_data(uint8_t type, uint8 cmd,
                                        const uint8 *payload, uint16 size_payload)
 {
-    return vivo_casebox_service_tx_rsp_data(type, cmd, payload, size_payload);
+    return casebox_service_tx_rsp_data(type, cmd, payload, size_payload);
 }
 ```
 
-**vivo_framework_common.h（统一的框架公共头文件）：**
+**framework_common.h（统一的框架公共头文件）：**
 
 ```c
-#ifndef __VIVO_FRAMEWORK_COMMON_H
-#define __VIVO_FRAMEWORK_COMMON_H
+#ifndef __FRAMEWORK_COMMON_H
+#define __FRAMEWORK_COMMON_H
 
 /* base include */
-#include "vivo_base.h"
-#include "vivo_message_define.h"
-#include "vivo_message_type_define.h"
-#include "vivo_os_message.h"
-#include "vivo_framework_init.h"
+#include "base.h"
+#include "message_define.h"
+#include "message_type_define.h"
+#include "os_message.h"
+#include "framework_init.h"
 
 /* base-manager include */
-#include "vivo_battery_manager.h"
-#include "vivo_casebox_manager.h"     // ← 添加 casebox manager
-#include "vivo_ble_manager.h"
-#include "vivo_gaia_manager.h"
+#include "battery_manager.h"
+#include "casebox_manager.h"     // ← 添加 casebox manager
+#include "ble_manager.h"
+#include "gaia_manager.h"
 
 /* base-service include */
-#include "vivo_battery_service.h"
-#include "vivo_casebox_service.h"     // ← 添加 casebox service
-#include "vivo_ble_service.h"
-#include "vivo_gaia_service.h"
+#include "battery_service.h"
+#include "casebox_service.h"     // ← 添加 casebox service
+#include "ble_service.h"
+#include "gaia_service.h"
 
 /* components include */
 /* ext module manager include */
@@ -840,23 +837,23 @@ bool vivo_casebox_manager_tx_rsp_data(uint8_t type, uint8 cmd,
 
 ```c
 #include "sdk_common.h"
-#include "vivo_framework_common.h"
+#include "framework_common.h"
 #include "ui_casebox.h"
 #include "ui_casebox_cmd.h"
 
 #undef LOG_TAG
-#define LOG_TAG "vivo_ui_casebox"
+#define LOG_TAG "ui_casebox"
 
 /* 静态变量、函数 */
-static TaskData vivo_ui_casebox_task;
+static TaskData ui_casebox_task;
 
-static void vivo_ui_casebox_msg_handler(Task task, MessageId id, Message msg)
+static void ui_casebox_msg_handler(Task task, MessageId id, Message msg)
 {
     UNUSED(task);
     switch(id) {
-        case VIVO_MSG_UARTCASE_RX_MORE_PACKET:   // 监听串口机盒解析成功的数据包
-            VIVO_MSG_UARTCASE_RX_MORE_PACKET_T* rx_packet =
-                (VIVO_MSG_UARTCASE_RX_MORE_PACKET_T*) msg;
+        case MSG_UARTCASE_RX_MORE_PACKET:   // 监听串口机盒解析成功的数据包
+            MSG_UARTCASE_RX_MORE_PACKET_T* rx_packet =
+                (MSG_UARTCASE_RX_MORE_PACKET_T*) msg;
             caseBoxCmd_Handle(rx_packet->mode, rx_packet->cmd,
                               rx_packet->payload, rx_packet->payloadsize);
             break;
@@ -866,11 +863,11 @@ static void vivo_ui_casebox_msg_handler(Task task, MessageId id, Message msg)
 }
 
 /* 初始化ui casebox */
-void vivo_ui_casebox_init(void)
+void ui_casebox_init(void)
 {
-    vivo_ui_casebox_task.handler = vivo_ui_casebox_msg_handler;
-    vivo_os_system_add_task(&vivo_ui_casebox_task);  // 向system注册task
-    vivo_casebox_manager_get_parser_result_add_task(&vivo_ui_casebox_task); // 注册串口接收task
+    ui_casebox_task.handler = ui_casebox_msg_handler;
+    os_system_add_task(&ui_casebox_task);  // 向system注册task
+    casebox_manager_get_parser_result_add_task(&ui_casebox_task); // 注册串口接收task
 }
 ```
 
@@ -934,33 +931,33 @@ void caseBoxCmd_Handle(uint8 mode, uint8 cmd, const uint8 *payload, uint16 paylo
 | 层级       | 命名格式                                                 | 说明                                    |
 | ---------- | -------------------------------------------------------- | --------------------------------------- |
 | SDK 抽象层 | `sdk_xxx`                                                | 例：`sdk_hal_5v_detect_is_plugin`       |
-| Service 层 | `vivo_XXX(模块)_svc_xxx` 或 `vivo_XXX(模块)_service_xxx` | svc 是 service 的缩写                   |
-| Manager 层 | `vivo_XXX(模块)_mgr_xxx` 或 `vivo_XXX(模块)_manager_xxx` | mgr 是 manager 的缩写                   |
-| UI 层      | `vivo_ui_XXX(模块)_xxx`                                  | 只在本 .c 文件内的，也可以直接 `ui_XXX` |
+| Service 层 | `XXX(模块)_svc_xxx` 或 `XXX(模块)_service_xxx` | svc 是 service 的缩写                   |
+| Manager 层 | `XXX(模块)_mgr_xxx` 或 `XXX(模块)_manager_xxx` | mgr 是 manager 的缩写                   |
+| UI 层      | `ui_XXX(模块)_xxx`                                  | 只在本 .c 文件内的，也可以直接 `ui_XXX` |
 
 **命名示例：**
 
 ```c
 bool sdk_hal_5v_detect_is_plugin(void);
-void vivo_casebox_service_switch_baudrate(uint8 sw_baud);
-void vivo_casebox_manager_switch_baudrate(uint8 sw_baud);
-void vivo_ui_casebox_msg_handler(Task task, MessageId id, Message msg);
+void casebox_service_switch_baudrate(uint8 sw_baud);
+void casebox_manager_switch_baudrate(uint8 sw_baud);
+void ui_casebox_msg_handler(Task task, MessageId id, Message msg);
 ```
 
 ------
 
 ### 3.2 消息 ID 规范
 
-消息统一在 `base/vivo_message_define.h` 中定义，并标注类型：
+消息统一在 `base/message_define.h` 中定义，并标注类型：
 
 ```c
 enum {
     ...
-    VIVO_MSG_MODULE_XXXX_BASE = 200,
-    VIVO_MSG_XXXX,    // public
-    VIVO_MSG_ZZZZ,    // limited
-    VIVO_MSG_YYYY,    // private
-    VIVO_MSG_KKKK,    // sub Msg, see to vivo_sub_message_kkkk_define.h
+    MSG_MODULE_XXXX_BASE = 200,
+    MSG_XXXX,    // public
+    MSG_ZZZZ,    // limited
+    MSG_YYYY,    // private
+    MSG_KKKK,    // sub Msg, see to sub_message_kkkk_define.h
 }
 ```
 
@@ -971,7 +968,7 @@ enum {
 | `public`  | 表示全局消息，即可以广播中 case 的消息                       |
 | `limited` | 表示受限的消息，监听这个消息需要一定条件（可能需要单独 add task 来监听） |
 | `private` | 表示私有消息，仅在某个文件或者模块中传递                     |
-| `sub Msg` | 表示需要扩展为子消息，可以参考 `vivo_sub_message_kkkk_define.h` 文件。message 内容中第一个结构体成员必须为 `sub_msg_id`（考虑到 Peer 同步、产测、自动化或者 OTA，有多个 ID） |
+| `sub Msg` | 表示需要扩展为子消息，可以参考 `sub_message_kkkk_define.h` 文件。message 内容中第一个结构体成员必须为 `sub_msg_id`（考虑到 Peer 同步、产测、自动化或者 OTA，有多个 ID） |
 
 ------
 
@@ -993,14 +990,14 @@ enum {
 
 ### 3.4 SDK 修改宏管控
 
-所有的 SDK 修改，都需要加宏，并且以 `"VIVO_TWS_ADAPT_XXXX"` 开头。
+所有的 SDK 修改，都需要加宏，并且以 `"TWS_ADAPT_XXXX"` 开头。
 
 **示例宏名：**
 
 ```
-VIVO_TWS_ADAPT_OS
-VIVO_TWS_ADAPT_BOX_OPEN_CLOSED
-VIVO_TWS_ADAPT_BATTERY_CAPTURE
+TWS_ADAPT_OS
+TWS_ADAPT_BOX_OPEN_CLOSED
+TWS_ADAPT_BATTERY_CAPTURE
 ```
 
 所有的宏，都必须记录到 `SDK_AL/SDK_ADAPT/QCC/MARCO_DEFINE.txt` 中（其他平台替换 QCC），用 `,` 隔开，然后描述大概的修改内容。
@@ -1008,9 +1005,9 @@ VIVO_TWS_ADAPT_BATTERY_CAPTURE
 **记录格式示例：**
 
 ```
-VIVO_TWS_ADAPT_OS, vivo框架初始化
-VIVO_TWS_ADAPT_BOX_OPEN_CLOSED, 开关盖event的添加
-VIVO_TWS_ADAPT_BATTERY_CAPTURE, 电池电压采集的修改
+TWS_ADAPT_OS, 框架初始化
+TWS_ADAPT_BOX_OPEN_CLOSED, 开关盖event的添加
+TWS_ADAPT_BATTERY_CAPTURE, 电池电压采集的修改
 ```
 
 ------
@@ -1020,17 +1017,17 @@ VIVO_TWS_ADAPT_BATTERY_CAPTURE, 电池电压采集的修改
 **指定给某个 Task 发送消息：**（一般用于本地延时处理，比如出入盒消抖）
 
 ```c
-void vivo_msg_send(Task task, MessageId id, void *message);
-void vivo_msg_send_later(Task task, MessageId id, void *message, uint32 delay);
-uint16 vivo_msg_cancel_all(Task task, MessageId id);
+void msg_send(Task task, MessageId id, void *message);
+void msg_send_later(Task task, MessageId id, void *message, uint32 delay);
+uint16 msg_cancel_all(Task task, MessageId id);
 ```
 
 **给 Service、UI 层发消息：**（默认 Service、UI 的 task 都有注册到 system os tasklist 中）
 
 ```c
-void vivo_msg_broadcast(MessageId id, void *message);
-void vivo_msg_broadcast_later(MessageId id, void *message, uint32 delay);
-uint16 vivo_msg_broadcast_cancel(MessageId id);
+void msg_broadcast(MessageId id, void *message);
+void msg_broadcast_later(MessageId id, void *message, uint32 delay);
+uint16 msg_broadcast_cancel(MessageId id);
 ```
 
 **立即执行某个消息：**（代替大量注册 callback）
@@ -1067,12 +1064,12 @@ extern BatteryManagerAdpTask battery_manager_adp_data;  // 不好：直接暴露
 **✅ 比较好的写法：**
 
 ```c
-static TaskData vivo_ui_battery_task;  // static 声明，仅本文件可见
+static TaskData ui_battery_task;  // static 声明，仅本文件可见
 
-void vivo_ui_battery_init(void)
+void ui_battery_init(void)
 {
-    vivo_ui_battery_task.handler = vivo_ui_battery_msg_handler;
-    vivo_os_system_add_task(&vivo_ui_battery_task);  // 在自己的 .c 文件，向自己的模块注册
+    ui_battery_task.handler = ui_battery_msg_handler;
+    os_system_add_task(&ui_battery_task);  // 在自己的 .c 文件，向自己的模块注册
 }
 ```
 
@@ -1100,7 +1097,7 @@ SDK平台抽象性 > 代码理解难易度 > Service的功能复用性 > 框架�
 - **变量和函数一定明确作用域**，仅本地使用的一定要使用 `static` 声明。
 - **禁止使用 `extern`**。
 - **manager 是没有 task 的**，只是接口封装。
-- **不是所有模块**在 vivo framework 中都需要加宏，基本的电量、出入盒、BT 连接、GAIA 等是不需要的。但是佩戴、汇顶 Sensor、耳温等扩展功能就需要加宏。
+- **不是所有模块**在 framework 中都需要加宏，基本的电量、出入盒、BT 连接、GAIA 等是不需要的。但是佩戴、汇顶 Sensor、耳温等扩展功能就需要加宏。
 
 ------
 
@@ -1115,8 +1112,8 @@ SDK平台抽象性 > 代码理解难易度 > Service的功能复用性 > 框架�
 | tasklist                | 保存多个 task 的链表，用于广播消息给所有注册者       |
 | IPC                     | Inter-Processor Communication，处理器间通信          |
 | SE                      | System Engineer，系统工程师                          |
-| vivo_msg_broadcast      | 广播消息给所有注册到 system os tasklist 的 task      |
+| msg_broadcast      | 广播消息给所有注册到 system os tasklist 的 task      |
 | MARCO_DEFINE.txt        | SDK 修改宏的统一记录文件                             |
 | P0/P1                   | QCC 平台的两个处理器核心                             |
-| vivo_framework_common.h | 框架公共头文件，包含所有 manager 和 service 的头文件 |
+| framework_common.h | 框架公共头文件，包含所有 manager 和 service 的头文件 |
 | sdk_common.h            | SDK AL 公共头文件，包含所有 SDK 抽象接口             |

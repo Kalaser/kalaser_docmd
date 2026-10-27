@@ -37,7 +37,7 @@ tags: [嵌入式, 消息机制, 架构]
 
 **消息发出去之后什么时候执行？**
 
-异步广播（`vivo_msg_broadcast`）只是把消息插进队列尾部，`broadcast` 调用立刻返回。消费者的 handler 要等到 `VM_thread` 下次从队列头部取到这条消息时才执行。中间可能已经处理了十几条其他消息。这就是"异步"的含义——发送方和接收方在时间上解耦。
+异步广播（`msg_broadcast`）只是把消息插进队列尾部，`broadcast` 调用立刻返回。消费者的 handler 要等到 `VM_thread` 下次从队列头部取到这条消息时才执行。中间可能已经处理了十几条其他消息。这就是"异步"的含义——发送方和接收方在时间上解耦。
 
 **同步执行（`MessageExecuteImmediate`）为什么能拿到消费者的返回值？**
 
@@ -45,7 +45,7 @@ tags: [嵌入式, 消息机制, 架构]
 
 **为什么 SDK AL 要把 ADK 消息 ID 翻译成内部消息 ID？**
 
-这是平台解耦的关键动作。`CHARGER_MESSAGE_ATTACHED` 是 QCC 平台 ADK 私有的消息 ID，BES 平台叫别的名字，Airoha 又叫别的。SDK AL 的 `.c` 文件（不同平台各有一份）负责订阅各自平台的原生消息，然后统一翻译成 `VIVO_MSG_5V_PLUGIN` 广播出去。上层的 Service/UI 代码只认 `VIVO_MSG_5V_PLUGIN`，完全不知道底下是什么平台。切换芯片时，只改 SDK AL 的 `.c` 实现，上层一行代码不用动。
+这是平台解耦的关键动作。`CHARGER_MESSAGE_ATTACHED` 是 QCC 平台 ADK 私有的消息 ID，BES 平台叫别的名字，Airoha 又叫别的。SDK AL 的 `.c` 文件（不同平台各有一份）负责订阅各自平台的原生消息，然后统一翻译成 `MSG_5V_PLUGIN` 广播出去。上层的 Service/UI 代码只认 `MSG_5V_PLUGIN`，完全不知道底下是什么平台。切换芯片时，只改 SDK AL 的 `.c` 实现，上层一行代码不用动。
 
 **`static TaskData task` 这个 static 为什么那么重要？**
 
