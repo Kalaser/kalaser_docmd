@@ -45,7 +45,7 @@
       "collapsible": true,
       "children": [
         { "title": "C 语言编码规范", "path": "/coding-standards/c-coding-standard" },
-        { "title": "C 语言编码规范（简明版）", "path": "/coding-standards/c-coding-standard-concise" },
+        { "title": "C++ 语言编码规范", "path": "/coding-standards/c-coding-standard-concise" },
         { "title": "高质量 C++/C 编程指南", "path": "/coding-standards/high-quality-cpp-guide" }
       ]
     },

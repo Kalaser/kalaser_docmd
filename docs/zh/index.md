@@ -36,10 +36,10 @@ docmd 专为 AI 代理设计。你的文档会自动生成 `llms.txt` 上下文�
 
 ## 🧱 编程规范
 
-C 语言编码规范与高质量 C/C++ 编程实践。
+C/C++ 语言编码规范与高质量编程实践。
 
 - [C 语言编码规范](/coding-standards/c-coding-standard)
-- [C 语言编码规范（简明版）](/coding-standards/c-coding-standard-concise)
+- [C++ 语言编码规范](/coding-standards/c-coding-standard-concise)
 - [高质量 C++/C 编程指南](/coding-standards/high-quality-cpp-guide)
 
 ---
