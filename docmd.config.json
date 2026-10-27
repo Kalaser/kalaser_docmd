@@ -1,6 +1,6 @@
 {
   "title": "我的文档",
-  "url": "https://YOUR_USERNAME.github.io/YOUR_REPO",
+  "url": "https://kalaser.github.io/kalaser_docmd",
   "src": "docs",
   "out": "site",
   "theme": {
@@ -40,17 +40,41 @@
       ]
     },
     {
+      "title": "编程规范",
+      "icon": "feather",
+      "collapsible": true,
+      "children": [
+        { "title": "C 语言编码规范", "path": "/coding-standards/c-coding-standard" },
+        { "title": "C 语言编码规范（简明版）", "path": "/coding-standards/c-coding-standard-concise" },
+        { "title": "高质量 C++/C 编程指南", "path": "/coding-standards/high-quality-cpp-guide" }
+      ]
+    },
+    {
+      "title": "嵌入式开发",
+      "icon": "cpu",
+      "collapsible": true,
+      "children": [
+        { "title": "嵌入式平台框架开发通用指南", "path": "/embedded/embedded-framework-guide" },
+        { "title": "vivo TWS 应用框架技术文档", "path": "/embedded/tws-app-framework" },
+        { "title": "NuttX API 全量接口使用指南", "path": "/embedded/nuttx-api-guide" },
+        { "title": "消费者与生产者关系机制", "path": "/embedded/producer-consumer-mechanism" }
+      ]
+    },
+    {
+      "title": "技术笔记",
+      "icon": "brain",
+      "collapsible": true,
+      "children": [
+        { "title": "AI 学习笔记", "path": "/articles/ai-notes" },
+        { "title": "C 语言循环与分支高级技巧", "path": "/articles/c-loops-branches-tips" },
+        { "title": "嵌入式 C 语言常用设计模式", "path": "/articles/embedded-c-design-patterns" }
+      ]
+    },
+    {
       "title": "参考",
       "icon": "settings",
       "children": [
         { "title": "配置参考", "path": "/reference/configuration" }
-      ]
-    },
-    {
-      "title": "笔记",
-      "icon": "brain",
-      "children": [
-        { "title": "AI 学习笔记", "path": "/articles/ai-notes" }
       ]
     }
   ]

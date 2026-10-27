@@ -34,6 +34,27 @@ docmd 专为 AI 代理设计。你的文档会自动生成 `llms.txt` 上下文�
 
 ---
 
+## 🧱 编程规范
+
+C 语言编码规范与高质量 C/C++ 编程实践。
+
+- [C 语言编码规范](/coding-standards/c-coding-standard)
+- [C 语言编码规范（简明版）](/coding-standards/c-coding-standard-concise)
+- [高质量 C++/C 编程指南](/coding-standards/high-quality-cpp-guide)
+
+---
+
+## 🔌 嵌入式开发
+
+嵌入式系统框架、TWS 应用框架、NuttX API 与消息机制。
+
+- [嵌入式平台系统框架开发通用指南](/embedded/embedded-framework-guide)
+- [vivo TWS 耳机应用框架技术文档](/embedded/tws-app-framework)
+- [NuttX API 全量接口使用指南](/embedded/nuttx-api-guide)
+- [消费者与生产者关系机制](/embedded/producer-consumer-mechanism)
+
+---
+
 ## ✨ 教程
 
 手把手教你创建第一篇文档并完成发布。
@@ -44,9 +65,11 @@ docmd 专为 AI 代理设计。你的文档会自动生成 `llms.txt` 上下文�
 
 ## 🧠 技术笔记
 
-学习记录与思考，当前包含 AI 与大语言模型相关内容。
+编程技巧与学习记录。
 
-[→ AI 学习笔记](/articles/ai-notes)
+- [AI 学习笔记](/articles/ai-notes)
+- [C 语言循环与分支高级技巧](/articles/c-loops-branches-tips)
+- [嵌入式 C 语言常用设计模式](/articles/embedded-c-design-patterns)
 
 ---
 
